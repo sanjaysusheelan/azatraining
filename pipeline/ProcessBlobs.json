@@ -23,7 +23,10 @@
 							"userProperties": [],
 							"typeProperties": {
 								"variableName": "blobName",
-								"value": ""
+								"value": {
+									"value": "@{item().BlobName}",
+									"type": "Expression"
+								}
 							}
 						},
 						{
