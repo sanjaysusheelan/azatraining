@@ -1,0 +1,10 @@
+{
+	"name": "LinkKV",
+	"properties": {
+		"annotations": [],
+		"type": "AzureKeyVault",
+		"typeProperties": {
+			"baseUrl": "https://azatrainingkeyvault.vault.azure.net/"
+		}
+	}
+}
