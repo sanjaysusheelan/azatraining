@@ -1,6 +1,78 @@
 {
 	"name": "ProcessBlobs",
 	"properties": {
+		"activities": [
+			{
+				"name": "ForEach1",
+				"type": "ForEach",
+				"dependsOn": [
+					{
+						"activity": "Lookup BlobMetaData",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
+				"userProperties": [],
+				"typeProperties": {
+					"activities": [
+						{
+							"name": "blobName",
+							"type": "SetVariable",
+							"dependsOn": [],
+							"userProperties": [],
+							"typeProperties": {
+								"variableName": "blobName",
+								"value": ""
+							}
+						},
+						{
+							"name": "blobPath",
+							"type": "SetVariable",
+							"dependsOn": [],
+							"userProperties": [],
+							"typeProperties": {
+								"variableName": "blobPath",
+								"value": {
+									"value": "@{item().Path}",
+									"type": "Expression"
+								}
+							}
+						}
+					]
+				}
+			},
+			{
+				"name": "Lookup BlobMetaData",
+				"type": "Lookup",
+				"dependsOn": [],
+				"policy": {
+					"timeout": "7.00:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"source": {
+						"type": "AzureSqlSource"
+					},
+					"dataset": {
+						"referenceName": "BlobMetadata",
+						"type": "DatasetReference"
+					}
+				}
+			}
+		],
+		"variables": {
+			"blobName": {
+				"type": "String"
+			},
+			"blobPath": {
+				"type": "String"
+			}
+		},
 		"annotations": []
 	}
 }
